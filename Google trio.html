@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moteur de recherche - Profils</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    header {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .profile {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-color: white;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .profile.active {
+      background-color: #4285f4;
+      color: white;
+      border-color: #4285f4;
+    }
+
+    .search-container {
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 24px;
+      background-color: #4285f4;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #3367d6;
+    }
+
+    .response {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #202124;
+      font-weight: bold;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="profile active" data-name="Jeanne">Jeanne</div>
+    <div class="profile" data-name="Emma">Emma</div>
+    <div class="profile" data-name="Carla">Carla</div>
+  </header>
+
+  <div class="search-container">
+    <h1 style="font-size:48px; color:#4285f4; margin-bottom:20px;">Mon Moteur</h1>
+    <input id="searchInput" type="text" placeholder="Pose une question..." />
+    <button id="searchBtn">Rechercher</button>
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    const profiles = document.querySelectorAll('.profile');
+    const responseDiv = document.getElementById('response');
+    const searchBtn = document.getElementById('searchBtn');
+    let activeProfile = 'Jeanne';
+
+    // Gérer la sélection de profil
+    profiles.forEach(profile => {
+      profile.addEventListener('click', () => {
+        profiles.forEach(p => p.classList.remove('active'));
+        profile.classList.add('active');
+        activeProfile = profile.dataset.name;
+      });
+    });
+
+    // Gérer le clic sur le bouton de recherche
+    searchBtn.addEventListener('click', () => {
+      let response = '';
+      if (activeProfile === 'Jeanne') response = 'lache Safra, il deal en plus c est un gros ksos. Il a de tatoué SAFRA sur le ventre, et la essaye de ne pas rire quoi';
+      else if (activeProfile === 'Emma') response = 'lache Lenni, il a un petit zizi lache ça mongole non';
+      else if (activeProfile === 'Carla') response = 'lache Mareva elle a tourné a tout moment elle a le VIH';
+      responseDiv.textContent = response;
+    });
+
+    // Appuyer sur "Entrée" lance la recherche
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
